@@ -70,12 +70,22 @@ export default defineConfig(
 ```js
 // noDebugger.ts
 
+// Define function rule options
+export interface noDebuggerOptions {
+  /**
+   * @deprecated Use bar instead
+   */
+  foo: string
+  bar: string
+}
+
 /**
  * Remove debugger from code
+ *
  * @param options The rule options
  * @returns RuleFunction
  */
-export function noDebugger(options?: unknown): RuleDefinition["create"] {
+export function noDebugger(options?: noDebuggerOptions): RuleDefinition["create"] {
   return (context) => {
     return {
       DebuggerStatement(node) {
@@ -91,7 +101,6 @@ export function noDebugger(options?: unknown): RuleDefinition["create"] {
     } satisfies RuleListener;
   };
 }
-
 ```
 
 ```js
@@ -100,7 +109,7 @@ export function noDebugger(options?: unknown): RuleDefinition["create"] {
 // ...
 import { noDebugger } from "./noDebugger.ts";
 
-const noDebuggerRule = noDebugger({/* pass rule options */});
+const noDebuggerRule = noDebugger({ bar: "pass rule options" });
 
 export default defineConfig(
   // ...
