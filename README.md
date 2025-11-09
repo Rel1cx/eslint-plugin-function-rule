@@ -1,9 +1,15 @@
-# eslint-plugin-function-rule
-
 ESLint plugin to write custom rules with JavaScript functions.
 
 > [!WARNING]
 > This package is a work in progress and is not yet ready for production use.
+
+## Index
+
+- [Index](#index)
+- [Installation](#installation)
+- [Write function rules inline](#write-function-rules-inline)
+- [Or import function rules from modules](#or-import-function-rules-from-modules)
+- [Define multiple function rules with custom prefix](#define-multiple-function-rules-with-custom-prefix)
 
 ## Installation
 
@@ -12,9 +18,7 @@ ESLint plugin to write custom rules with JavaScript functions.
 npm install --save-dev eslint-plugin-function-rule
 ```
 
-## Configure ESLint
-
-### Write function rules inline
+## Write function rules inline
 
 ```js
 // eslint.config.ts
@@ -65,7 +69,7 @@ export default defineConfig(
 );
 ```
 
-### Import function rules from modules
+## Or import function rules from modules
 
 ```js
 // noDebugger.ts
@@ -93,8 +97,6 @@ export function noDebugger(options?: noDebuggerOptions) {
 }
 ```
 
-### Define function rule with default prefix
-
 ```js
 // eslint.config.ts
 
@@ -116,28 +118,27 @@ export default defineConfig(
 );
 ```
 
-### Define function rule with custom prefix
+## Define multiple function rules with custom prefix
 
 ```js
 // eslint.config.ts
 
 // ...
 import { defineRule } from "eslint-plugin-function-rule";
-import { noDebugger } from "./noDebugger.ts";
 
 export default defineConfig(
   // ...
   {
     files: ["**/*.ts"],
     rules: {
-      "no-debugger/function-rule": "error",
-
-      "custom/function-rule": "error",
+      "custom-1/function-rule": 1,
+      "custom-2/function-rule": 2,
     },
     plugins: {
-      "no-debugger": defineRule(noDebugger({ /* pass rule options */ })),
-
-      custom: defineRule((context) => {
+      "custom-1": defineRule((context) => {
+        return { /* your won rule logic */ }
+      }),
+      "custom-2": defineRule((context) => {
         return { /* your won rule logic */ }
       }),
     },
