@@ -10,7 +10,7 @@ export function defineRuleListener(ruleListener: Rule.RuleListener) {
     return listener
 }
 
-export default function functionRule(create: Rule.RuleModule["create"], name = "function-rule") {
+export function functionRule(name: string, create: Rule.RuleModule["create"]) {
     return {
         rules: {
             [name]: {

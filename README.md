@@ -20,7 +20,7 @@ npm install --save-dev eslint-plugin-function-rule
 // eslint.config.ts
 
 import eslintJs from "@eslint/js";
-import type { RuleListener } from "@typescript-eslint/utils/ts-eslint";
+import type { Rule } from "eslint";
 import functionRule from "eslint-plugin-function-rule";
 import { defineConfig } from "eslint/config";
 import tseslint from "typescript-eslint";
@@ -43,10 +43,10 @@ export default defineConfig(
   {
     files: ["**/*.ts"],
     rules: {
-      "function-rule/function-rule": "error",
+      "function-rule/v1": "error",
     },
     plugins: {
-      "function-rule": functionRule((context) => {
+      "function-rule": functionRule("v1", (context) => {
         return {
           DebuggerStatement(node) {
             context.report({
@@ -58,7 +58,7 @@ export default defineConfig(
               },
             });
           },
-        } satisfies RuleListener;
+        } satisfies Rule.RuleListener;
       }),
     },
   },
@@ -70,63 +70,46 @@ export default defineConfig(
 ```js
 // noDebugger.ts
 
-import type { RuleDefinition } from "@eslint/core";
-import type { RuleListener } from "@typescript-eslint/utils/ts-eslint";
-import { defineRuleVisitor } from "eslint-plugin-function-rule";
+import type { Rule } from "eslint";
+import { defineRuleListener } from "eslint-plugin-function-rule";
 
 // Define and document function rule options
-export interface noDebuggerOptions {
-  /**
-   * @deprecated Use bar instead
-   */
-  foo: string
-  bar: string
-}
+export interface noDebuggerOptions {}
 
 // Define and document function rule
-/**
- * Remove debugger from code
- *
- * @param options The rule options
- * @returns RuleFunction
- */
-export function noDebugger(options?: noDebuggerOptions): RuleDefinition["create"] {
-  return (context) => {
-    return defineRuleVisitor({
-      DebuggerStatement(node) {
-        context.report({
-          node,
-          message: "Remove 'debugger' from code.",
+export function noDebugger(context: Rule.RuleContext, options?: noDebuggerOptions): Rule.RuleListener {
+  return defineRuleListener({
+    DebuggerStatement(node) {
+      context.report({
+        node,
+        message: "Remove 'debugger' from code.",
 
-          fix(fixer) {
-            return fixer.remove(node);
-          },
-        });
-      },
-    });
-  };
+        fix(fixer) {
+          return fixer.remove(node);
+        },
+      });
+    },
+  });
 }
 ```
 
 ```js
-// Import and use function rule
+// eslint.config.ts
 
 // ...
 import { noDebugger } from "./noDebugger.ts";
-
-const noDebuggerRule = noDebugger({ bar: "pass rule options" });
 
 export default defineConfig(
   // ...
   {
     files: ["**/*.ts"],
     rules: {
-      "function-rule/function-rule": "error",
+      "function-rule/v1": "error",
     },
     plugins: {
-      "function-rule": functionRule((context) => {
+      "function-rule": functionRule("v1", (context) => {
         return {
-          ...noDebuggerRule(context)
+          ...noDebugger(context, { /* pass rule options */ })
         }
       }),
     },
