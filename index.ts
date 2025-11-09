@@ -10,10 +10,10 @@ export function defineRuleListener(ruleListener: Rule.RuleListener) {
     return listener
 }
 
-export default function functionRule(create: Rule.RuleModule["create"]) {
+export default function functionRule(create: Rule.RuleModule["create"], name = "function-rule") {
     return {
         rules: {
-            "function-rule": {
+            [name]: {
                 meta: {
                     fixable: "code",
                     hasSuggestions: true,
