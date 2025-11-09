@@ -70,7 +70,7 @@ export default defineConfig(
 ```js
 // noDebugger.ts
 
-// Define function rule options
+// Define and document function rule options
 export interface noDebuggerOptions {
   /**
    * @deprecated Use bar instead
@@ -79,6 +79,7 @@ export interface noDebuggerOptions {
   bar: string
 }
 
+// Define and document function rule
 /**
  * Remove debugger from code
  *
@@ -104,7 +105,7 @@ export function noDebugger(options?: noDebuggerOptions): RuleDefinition["create"
 ```
 
 ```js
-// eslint.config.ts
+// Import and use function rule
 
 // ...
 import { noDebugger } from "./noDebugger.ts";
