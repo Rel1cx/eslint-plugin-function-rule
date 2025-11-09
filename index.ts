@@ -14,12 +14,12 @@ export function defineRule(create: Rule.RuleModule["create"]) {
     } as const;
 }
 
-let id = 0;
+let id = 1;
 
 export function defineRuleListener(ruleListener: Rule.RuleListener) {
     const listener: Rule.RuleListener = {}
     for (const key of Object.keys(ruleListener)) {
-        listener[key + `[type!=${id++}]`] = ruleListener[key]
+        listener[" ".repeat(id++) + key] = ruleListener[key]
     }
     return listener
 }
