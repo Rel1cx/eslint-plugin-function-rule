@@ -77,19 +77,19 @@ import { defineRuleListener } from "eslint-plugin-function-rule";
 export interface noDebuggerOptions {}
 
 // Define and document function rule
-export function noDebugger(context: Rule.RuleContext, options?: noDebuggerOptions): Rule.RuleListener {
-  return defineRuleListener({
-    DebuggerStatement(node) {
-      context.report({
-        node,
-        message: "Remove 'debugger' from code.",
+export function noDebugger(options?: noDebuggerOptions) {
+    return (context: Rule.RuleContext) => defineRuleListener({
+        DebuggerStatement(node) {
+            context.report({
+                node,
+                message: "Remove 'debugger' from code.",
 
-        fix(fixer) {
-          return fixer.remove(node);
+                fix(fixer) {
+                    return fixer.remove(node);
+                },
+            });
         },
-      });
-    },
-  });
+    });
 }
 ```
 
@@ -104,14 +104,10 @@ export default defineConfig(
   {
     files: ["**/*.ts"],
     rules: {
-      "function-rule/v1": "error",
+      "no-debugger/v1": "error",
     },
     plugins: {
-      "function-rule": functionRule("v1", (context) => {
-        return {
-          ...noDebugger(context, { /* pass rule options */ })
-        }
-      }),
+      "no-debugger": functionRule("v1", noDebugger({ /* pass rule options */ })),
     },
   },
 );
