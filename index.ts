@@ -1,9 +1,9 @@
 import type { Rule } from "eslint";
 
-export function defineRule(name: string, create: Rule.RuleModule["create"]) {
+export function defineRule(create: Rule.RuleModule["create"]) {
     return {
         rules: {
-            [name]: {
+            "function-rule": {
                 meta: {
                     fixable: "code",
                     hasSuggestions: true,

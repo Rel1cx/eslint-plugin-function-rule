@@ -43,10 +43,10 @@ export default defineConfig(
   {
     files: ["**/*.ts"],
     rules: {
-      "function-rule/v1": "error",
+      "function-rule/function-rule": "error",
     },
     plugins: {
-      "function-rule": defineRule("v1", (context) => {
+      "function-rule": defineRule((context) => {
         return {
           DebuggerStatement(node) {
             context.report({
@@ -93,6 +93,8 @@ export function noDebugger(options?: noDebuggerOptions) {
 }
 ```
 
+### Define function rule with default prefix
+
 ```js
 // eslint.config.ts
 
@@ -105,10 +107,39 @@ export default defineConfig(
   {
     files: ["**/*.ts"],
     rules: {
-      "no-debugger/v1": "error",
+      "function-rule/function-rule": "error",
     },
     plugins: {
-      "no-debugger": defineRule("v1", noDebugger({ /* pass rule options */ })),
+      "function-rule": defineRule(noDebugger({ /* pass rule options */ })),
+    },
+  },
+);
+```
+
+### Define function rule with custom prefix
+
+```js
+// eslint.config.ts
+
+// ...
+import { defineRule } from "eslint-plugin-function-rule";
+import { noDebugger } from "./noDebugger.ts";
+
+export default defineConfig(
+  // ...
+  {
+    files: ["**/*.ts"],
+    rules: {
+      "no-debugger/function-rule": "error",
+
+      "custom/function-rule": "error",
+    },
+    plugins: {
+      "no-debugger": defineRule(noDebugger({ /* pass rule options */ })),
+
+      custom: defineRule((context) => {
+        return { /* your won rule logic */ }
+      }),
     },
   },
 );
