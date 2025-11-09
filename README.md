@@ -97,6 +97,7 @@ export function noDebugger(options?: noDebuggerOptions) {
 // eslint.config.ts
 
 // ...
+import { defineRule } from "eslint-plugin-function-rule";
 import { noDebugger } from "./noDebugger.ts";
 
 export default defineConfig(
