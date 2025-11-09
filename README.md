@@ -72,6 +72,7 @@ export default defineConfig(
 
 import type { RuleDefinition } from "@eslint/core";
 import type { RuleListener } from "@typescript-eslint/utils/ts-eslint";
+import { defineRuleVisitor } from "eslint-plugin-function-rule";
 
 // Define and document function rule options
 export interface noDebuggerOptions {
@@ -91,7 +92,7 @@ export interface noDebuggerOptions {
  */
 export function noDebugger(options?: noDebuggerOptions): RuleDefinition["create"] {
   return (context) => {
-    return {
+    return defineRuleVisitor({
       DebuggerStatement(node) {
         context.report({
           node,
@@ -102,7 +103,7 @@ export function noDebugger(options?: noDebuggerOptions): RuleDefinition["create"
           },
         });
       },
-    } satisfies RuleListener;
+    });
   };
 }
 ```
@@ -124,7 +125,9 @@ export default defineConfig(
     },
     plugins: {
       "function-rule": functionRule((context) => {
-        noDebuggerRule(context);
+        return {
+          ...noDebuggerRule(context)
+        }
       }),
     },
   },

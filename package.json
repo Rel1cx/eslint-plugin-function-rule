@@ -18,6 +18,7 @@
     "build": "tsdown"
   },
   "dependencies": {
+    "string-ts": "^2.2.1",
     "@eslint/core": "^0.17.0"
   },
   "devDependencies": {

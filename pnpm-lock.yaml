@@ -11,6 +11,9 @@ importers:
       '@eslint/core':
         specifier: ^0.17.0
         version: 0.17.0
+      string-ts:
+        specifier: ^2.2.1
+        version: 2.2.1
       typescript:
         specifier: ^5
         version: 5.9.3
@@ -290,6 +293,9 @@ packages:
     engines: {node: '>=10'}
     hasBin: true
 
+  string-ts@2.2.1:
+    resolution: {integrity: sha512-Q2u0gko67PLLhbte5HmPfdOjNvUKbKQM+mCNQae6jE91DmoFHY6HH9GcdqCeNx87DZ2KKjiFxmA0R/42OneGWw==}
+
   tinyexec@1.0.2:
     resolution: {integrity: sha512-W/KYk+NFhkmsYpuHq5JykngiOCnxeVL8v8dFnqxSD8qEEdRfXk1SDM6JzNqcERbcGYj9tMrDQBYV9cjgnunFIg==}
     engines: {node: '>=18'}
@@ -565,6 +571,8 @@ snapshots:
       '@rolldown/binding-win32-x64-msvc': 1.0.0-beta.47
 
   semver@7.7.3: {}
+
+  string-ts@2.2.1: {}
 
   tinyexec@1.0.2: {}
 
