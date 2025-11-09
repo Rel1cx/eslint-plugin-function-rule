@@ -21,7 +21,7 @@ npm install --save-dev eslint-plugin-function-rule
 
 import eslintJs from "@eslint/js";
 import type { Rule } from "eslint";
-import functionRule from "eslint-plugin-function-rule";
+import { defineRule } from "eslint-plugin-function-rule";
 import { defineConfig } from "eslint/config";
 import tseslint from "typescript-eslint";
 
@@ -46,7 +46,7 @@ export default defineConfig(
       "function-rule/v1": "error",
     },
     plugins: {
-      "function-rule": functionRule("v1", (context) => {
+      "function-rule": defineRule("v1", (context) => {
         return {
           DebuggerStatement(node) {
             context.report({
@@ -107,7 +107,7 @@ export default defineConfig(
       "no-debugger/v1": "error",
     },
     plugins: {
-      "no-debugger": functionRule("v1", noDebugger({ /* pass rule options */ })),
+      "no-debugger": defineRule("v1", noDebugger({ /* pass rule options */ })),
     },
   },
 );
