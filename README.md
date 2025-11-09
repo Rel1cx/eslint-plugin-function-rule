@@ -70,6 +70,9 @@ export default defineConfig(
 ```js
 // noDebugger.ts
 
+import type { RuleDefinition } from "@eslint/core";
+import type { RuleListener } from "@typescript-eslint/utils/ts-eslint";
+
 // Define and document function rule options
 export interface noDebuggerOptions {
   /**
