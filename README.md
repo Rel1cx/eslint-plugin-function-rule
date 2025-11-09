@@ -10,6 +10,7 @@ ESLint plugin to write custom rules with JavaScript functions.
 - [Write function rules inline](#write-function-rules-inline)
 - [Or import function rules from modules](#or-import-function-rules-from-modules)
 - [Define multiple function rules with custom prefix](#define-multiple-function-rules-with-custom-prefix)
+- [License](#license)
 
 ## Installation
 
@@ -145,3 +146,7 @@ export default defineConfig(
   },
 );
 ```
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
