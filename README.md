@@ -17,9 +17,8 @@ npm install --save-dev eslint-plugin-function-rule
 ### Write function rules inline
 
 ```js
-// eslint.config.js
+// eslint.config.ts
 
-// @ts-check
 import eslintJs from "@eslint/js";
 import type { RuleListener } from "@typescript-eslint/utils/ts-eslint";
 import functionRule from "eslint-plugin-function-rule";
@@ -72,7 +71,7 @@ export default defineConfig(
 // noDebugger.ts
 
 /**
- * Remove console methods from code
+ * Remove debugger from code
  * @param options The rule options
  * @returns RuleFunction
  */
@@ -96,13 +95,12 @@ export function noDebugger(options?: unknown): RuleDefinition["create"] {
 ```
 
 ```js
-// eslint.config.js
+// eslint.config.ts
 
-// @ts-check
 // ...
 import { noDebugger } from "./noDebugger.ts";
 
-const noDebuggerRule = noDebugger({/* rule options */});
+const noDebuggerRule = noDebugger({/* pass rule options */});
 
 export default defineConfig(
   // ...
