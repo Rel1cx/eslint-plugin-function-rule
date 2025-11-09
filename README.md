@@ -65,7 +65,7 @@ export default defineConfig(
 );
 ```
 
-### Import function rules from packages
+### Import function rules from modules
 
 ```js
 // noDebugger.ts
