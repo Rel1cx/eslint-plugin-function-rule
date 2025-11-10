@@ -24,27 +24,11 @@ npm install --save-dev eslint-plugin-function-rule
 ```js
 // eslint.config.ts
 
-import eslintJs from "@eslint/js";
 import type { Rule } from "eslint";
-import { defineRule } from "eslint-plugin-function-rule";
 import { defineConfig } from "eslint/config";
-import tseslint from "typescript-eslint";
+import { defineRule } from "eslint-plugin-function-rule";
 
 export default defineConfig(
-  {
-    files: ["**/*.ts", "**/*.tsx"],
-    extends: [
-      eslintJs.configs.recommended,
-      tseslint.configs.recommended,
-    ],
-    languageOptions: {
-      parser: tseslint.parser,
-      parserOptions: {
-        projectService: true,
-        tsconfigRootDir: import.meta.dirname,
-      },
-    },
-  },
   {
     files: ["**/*.ts"],
     rules: {
@@ -101,19 +85,18 @@ export function noDebugger(options?: noDebuggerOptions) {
 ```js
 // eslint.config.ts
 
-// ...
 import { defineRule } from "eslint-plugin-function-rule";
+import { defineConfig } from "eslint/config";
 import { noDebugger } from "./noDebugger.ts";
 
 export default defineConfig(
-  // ...
   {
     files: ["**/*.ts"],
     rules: {
       "function-rule/function-rule": "error",
     },
     plugins: {
-      "function-rule": defineRule(noDebugger({ /* pass rule options */ })),
+      "function-rule": defineRule(noDebugger({/* pass rule options */})),
     },
   },
 );
@@ -124,11 +107,10 @@ export default defineConfig(
 ```js
 // eslint.config.ts
 
-// ...
 import { defineRule } from "eslint-plugin-function-rule";
+import { defineConfig } from "eslint/config";
 
 export default defineConfig(
-  // ...
   {
     files: ["**/*.ts"],
     rules: {
@@ -137,10 +119,10 @@ export default defineConfig(
     },
     plugins: {
       "custom-1": defineRule((context) => {
-        return { /* your won rule logic */ }
+        return {/* your won rule logic */};
       }),
       "custom-2": defineRule((context) => {
-        return { /* your won rule logic */ }
+        return {/* your won rule logic */};
       }),
     },
   },
@@ -150,3 +132,5 @@ export default defineConfig(
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+This project is and will continue to maintain that 90% of the code is written by humans.

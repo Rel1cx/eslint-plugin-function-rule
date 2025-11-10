@@ -15,12 +15,15 @@
     "package.json"
   ],
   "scripts": {
-    "build": "tsdown"
+    "build": "tsdown",
+    "format:check": "dprint check",
+    "format:write": "dprint fmt"
   },
   "dependencies": {
     "@eslint/core": "^0.17.0"
   },
   "devDependencies": {
+    "dprint": "^0.50.2",
     "tsdown": "^0.16.1"
   },
   "peerDependencies": {
