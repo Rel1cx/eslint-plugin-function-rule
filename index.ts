@@ -1,6 +1,6 @@
 import type { Rule } from "eslint";
 
-export function defineRule(create: Rule.RuleModule["create"]) {
+export function functionRule(create: Rule.RuleModule["create"]) {
   return {
     rules: {
       "function-rule": {

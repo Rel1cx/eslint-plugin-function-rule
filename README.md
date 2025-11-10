@@ -26,7 +26,7 @@ npm install --save-dev eslint-plugin-function-rule
 
 import type { Rule } from "eslint";
 import { defineConfig } from "eslint/config";
-import { defineRule } from "eslint-plugin-function-rule";
+import { functionRule } from "eslint-plugin-function-rule";
 
 export default defineConfig(
   {
@@ -35,7 +35,7 @@ export default defineConfig(
       "function-rule/function-rule": "error",
     },
     plugins: {
-      "function-rule": defineRule((context) => {
+      "function-rule": functionRule((context) => {
         return {
           DebuggerStatement(node) {
             context.report({
@@ -60,7 +60,7 @@ export default defineConfig(
 // noDebugger.ts
 
 import type { Rule } from "eslint";
-import { defineRuleListener } from "eslint-plugin-function-rule";
+import { functionRuleListener } from "eslint-plugin-function-rule";
 
 // Define and document function rule options
 export interface noDebuggerOptions {}
@@ -85,7 +85,7 @@ export function noDebugger(options?: noDebuggerOptions) {
 ```js
 // eslint.config.ts
 
-import { defineRule } from "eslint-plugin-function-rule";
+import { functionRule } from "eslint-plugin-function-rule";
 import { defineConfig } from "eslint/config";
 import { noDebugger } from "./noDebugger.ts";
 
@@ -96,7 +96,7 @@ export default defineConfig(
       "function-rule/function-rule": "error",
     },
     plugins: {
-      "function-rule": defineRule(noDebugger({/* pass rule options */})),
+      "function-rule": functionRule(noDebugger({/* pass rule options */})),
     },
   },
 );
@@ -107,7 +107,7 @@ export default defineConfig(
 ```js
 // eslint.config.ts
 
-import { defineRule } from "eslint-plugin-function-rule";
+import { functionRule } from "eslint-plugin-function-rule";
 import { defineConfig } from "eslint/config";
 
 export default defineConfig(
@@ -118,10 +118,10 @@ export default defineConfig(
       "custom-2/function-rule": 2,
     },
     plugins: {
-      "custom-1": defineRule((context) => {
+      "custom-1": functionRule((context) => {
         return {/* your won rule logic */};
       }),
-      "custom-2": defineRule((context) => {
+      "custom-2": functionRule((context) => {
         return {/* your won rule logic */};
       }),
     },
