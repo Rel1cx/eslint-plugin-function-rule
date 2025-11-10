@@ -47,7 +47,7 @@ export default defineConfig(
               },
             });
           },
-        } satisfies Rule.RuleListener;
+        };
       }),
     },
   },
@@ -67,7 +67,7 @@ export interface noDebuggerOptions {}
 
 // Define and document function rule
 export function noDebugger(options?: noDebuggerOptions) {
-    return (context: Rule.RuleContext) => defineRuleListener({
+    return (context: Rule.RuleContext): Rule.RuleListener => ({
         DebuggerStatement(node) {
             context.report({
                 node,
