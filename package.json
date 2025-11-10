@@ -6,10 +6,15 @@
   "type": "module",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
-    }
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      }
+    },
+    "./package.json": "./package.json"
   },
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "files": [
     "dist",
     "package.json"
@@ -17,7 +22,8 @@
   "scripts": {
     "build": "tsdown",
     "format:check": "dprint check",
-    "format:write": "dprint fmt"
+    "format:write": "dprint fmt",
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "@eslint/core": "^0.17.0"

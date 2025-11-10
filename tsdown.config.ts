@@ -3,7 +3,7 @@ import type { UserConfig } from "tsdown";
 export default {
   clean: true,
   dts: true,
-  entry: ["index.ts"],
+  entry: ["src/index.ts"],
   external: ["eslint", "typescript"],
   fixedExtension: false,
   format: ["esm"],
