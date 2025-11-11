@@ -30,7 +30,7 @@
   },
   "devDependencies": {
     "dprint": "^0.50.2",
-    "tsdown": "^0.16.1"
+    "tsdown": "^0.16.2"
   },
   "peerDependencies": {
     "eslint": "^9.39.1",
