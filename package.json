@@ -25,15 +25,15 @@
     "format:write": "dprint fmt",
     "type-check": "tsc --noEmit"
   },
-  "dependencies": {
-    "@eslint/core": "^1.0.0"
-  },
   "devDependencies": {
+    "@eslint/core": "^1.0.0",
     "dprint": "^0.50.2",
-    "tsdown": "^0.16.4"
+    "eslint": "^9.39.1",
+    "tsdown": "^0.16.4",
+    "typescript": "^5.9.3"
   },
   "peerDependencies": {
-    "eslint": "^9.39.1",
-    "typescript": "^5"
+    "@eslint/core": "^1.0.0",
+    "eslint": "^9.39.1"
   }
 }
