@@ -1,8 +1,5 @@
 ESLint plugin to write custom rules with JavaScript functions.
 
-> [!WARNING]
-> This package is a work in progress and is not yet ready for production use.
-
 ## Index
 
 - [Index](#index)
