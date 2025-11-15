@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-function-rule",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "license": "MIT",
   "sideEffects": false,
   "type": "module",
@@ -26,11 +26,11 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@eslint/core": "^0.17.0"
+    "@eslint/core": "^1.0.0"
   },
   "devDependencies": {
     "dprint": "^0.50.2",
-    "tsdown": "^0.16.2"
+    "tsdown": "^0.16.4"
   },
   "peerDependencies": {
     "eslint": "^9.39.1",
