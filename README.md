@@ -57,28 +57,28 @@ export default defineConfig(
 ## Or import function rules from modules
 
 ```js
-// noDebugger.ts
+// no-null.ts
 
 import type { Rule } from "eslint";
-import { functionRuleListener } from "eslint-plugin-function-rule";
 
-// Define and document function rule options
-export interface noDebuggerOptions {}
-
-// Define and document function rule
-export function noDebugger(options?: noDebuggerOptions) {
-    return (context: Rule.RuleContext): Rule.RuleListener => ({
-        DebuggerStatement(node) {
-            context.report({
-                node,
-                message: "Remove 'debugger' from code.",
-
-                fix(fixer) {
-                    return fixer.remove(node);
-                },
-            });
-        },
-    });
+export function noNull(options?: { enableAutoFix?: boolean; enableSuggest?: boolean }) {
+  const { enableAutoFix = false, enableSuggest = false } = options ?? {};
+  return (context: Rule.RuleContext): Rule.RuleListener => {
+    return {
+      Literal(node) {
+        if (node.raw !== "null") return;
+        function fix(fixer: Rule.RuleFixer) {
+          return fixer.replaceText(node, "undefined");
+        }
+        context.report({
+          node: node.parent,
+          message: "Avoid using 'null'; Use 'undefined' instead.",
+          ...enableAutoFix ? { fix } : {},
+          ...enableSuggest ? { suggest: [{ fix, desc: "Replace with 'undefined'." }] } : {},
+        });
+      },
+    };
+  };
 }
 ```
 
@@ -87,7 +87,7 @@ export function noDebugger(options?: noDebuggerOptions) {
 
 import { functionRule } from "eslint-plugin-function-rule";
 import { defineConfig } from "eslint/config";
-import { noDebugger } from "./noDebugger.ts";
+import { noNull } from "./no-null.ts";
 
 export default defineConfig(
   {
@@ -96,7 +96,7 @@ export default defineConfig(
       "function-rule/function-rule": "error",
     },
     plugins: {
-      "function-rule": functionRule(noDebugger({/* pass rule options */})),
+      "function-rule": functionRule(noNull({ enableAutoFix: true })),
     },
   },
 );
