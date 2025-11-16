@@ -63,7 +63,7 @@ export function noNull(options?: { enableAutoFix?: boolean; enableSuggest?: bool
   return (context: Rule.RuleContext): Rule.RuleListener => {
     return {
       Literal(node) {
-        if (node.raw !== "null") return;
+        if (node.raw !== "null" || node.parent.type !== "BinaryExpression") return;
         function fix(fixer: Rule.RuleFixer) {
           return fixer.replaceText(node, "undefined");
         }
